@@ -10,8 +10,8 @@ class DataHandler:
     Test data: 70001-73831
     '''
     _trainingStart = 1
-    _trainingEnd = 70001
-    _testStart = 70001
+    _trainingEnd = 60001
+    _testStart = 60001
     _testEnd = 73831
 
     @staticmethod
