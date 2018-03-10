@@ -47,4 +47,15 @@ def originStats():
         stats[localLabel][origin[idx]] +=1
     return stats
     
-print(originStats())
+
+def Stats(column):
+    stats = dict()
+    for idx, column in enumerate(column):
+        if column not in stats:
+            stats[column] = dict()
+        if label[idx] not in stats[column]:
+            stats[column][label[idx]] = 0
+        stats[column][label[idx]] +=1
+    return stats
+    
+print(Stats(pax))
