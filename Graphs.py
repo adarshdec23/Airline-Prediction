@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from DataHandler import DataHandler
 
 
-allData = DataHandler.getAllData()[1:-1]
+allData = DataHandler.getAllData()
 bookingDate = []
 origin = []
 dest = []
@@ -58,4 +58,4 @@ def Stats(column):
         stats[column][label[idx]] +=1
     return stats
     
-print(Stats(pax))
+print(Stats(bookingDate))

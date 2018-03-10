@@ -7,12 +7,12 @@ class DataHandler:
     
     '''
     Training data: 1-70001
-    Test data: 70001-73831
+    Test data: 70001-73832
     '''
     _trainingStart = 1
     _trainingEnd = 60001
     _testStart = 60001
-    _testEnd = 73831
+    _testEnd = 73832
 
     @staticmethod
     def getAllData():

@@ -2,9 +2,10 @@ from sklearn.tree import DecisionTreeClassifier
 from DataHandler import DataHandler
 import numpy as np
 from Utils import OneHotEncode
+from datetime import datetime
 
 
-allData = DataHandler.getAllData()[1:-1]
+allData = DataHandler.getAllData()[1:]
 bookingDate = []
 origin = []
 dest = []
@@ -29,13 +30,27 @@ for row in allData:
     deptTime.append(row[DEPTTIME])
     pax.append(row[PAX])
     label.append(row[LABEL])
+    
+def getEncodedDepartureDate(iDeptDate):
+    #Transform departure date to day of week - 0-6.  Then again onehot encode it as is required
+    departureDay = []
+    for stringDate in deptDate:
+        departureDay.append(datetime.strptime(stringDate, '%Y%m%d').weekday())
+
+    return OneHotEncode().encode(departureDay)
+    
+    
+    
+    
 
 originEncoder = OneHotEncode()
 destinationEncoder = OneHotEncode()
 
-for row in allData:
-    origin.append(row[ORIGIN])
-    dest.append(row[DEST])
 
 encodedOrigin = originEncoder.encode(origin)
 encodedDestination = destinationEncoder.encode(dest)
+
+
+encodedDepartureDay = getEncodedDepartureDate(deptDate)
+
+    
