@@ -39,7 +39,31 @@ def getEncodedDepartureDate(iDeptDate):
 
     return OneHotEncode().encode(departureDay)
     
-    
+def getEncodedDepartureTime(iDeptTime):
+    timeSlots = []
+    for oneTimeSlot in iDeptTime:
+        oneTimeSlot = int(oneTimeSlot)
+        if oneTimeSlot > 0 and oneTimeSlot < 359:
+            timeSlots.append("night")
+        elif oneTimeSlot >= 400 and oneTimeSlot <1100:
+            timeSlots.append("morning")
+        elif oneTimeSlot >= 1100 and oneTimeSlot < 1540:
+            timeSlots.append("noon")
+        elif oneTimeSlot >=1540 and oneTimeSlot < 2000:
+            timeSlots.append("evening")
+        else:
+            timeSlots.append("night")
+
+    return  OneHotEncode().encode(timeSlots)
+
+def getEncodedPax(iPax):
+    encodedPax = []
+    for row in iPax:
+        if int(row) > 1:
+            encodedPax.append("group")
+        else:
+            encodedPax.append("single")
+    return OneHotEncode().encode(encodedPax)
     
     
 
@@ -53,4 +77,8 @@ encodedDestination = destinationEncoder.encode(dest)
 
 encodedDepartureDay = getEncodedDepartureDate(deptDate)
 
-    
+encodedDepartureTime = getEncodedDepartureTime(deptTime)
+
+encodedPax = getEncodedPax(pax)
+
+# There, all done preparing data. Now for the hard part :(
