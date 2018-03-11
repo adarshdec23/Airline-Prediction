@@ -57,5 +57,29 @@ def Stats(column):
             stats[column][label[idx]] = 0
         stats[column][label[idx]] +=1
     return stats
-    
-print(Stats(bookingDate))
+
+def pairStats():
+    stats = dict()
+
+    for listVal in allData[1:]:
+        oriDestPair = listVal[2] + listVal[3]
+        if oriDestPair not in stats:
+            stats[oriDestPair] = dict()
+            stats[oriDestPair][listVal[7]] = dict()
+            stats[oriDestPair][listVal[7]]["Count"] = 1
+            stats[oriDestPair][listVal[7]]["PaxCount"] = int(listVal[6])
+        else:
+            if listVal[7] not in stats[oriDestPair]:
+                stats[oriDestPair][listVal[7]] = dict()
+                stats[oriDestPair][listVal[7]]["Count"] = 1
+                stats[oriDestPair][listVal[7]]["PaxCount"] = int(listVal[6])
+            else:
+                stats[oriDestPair][listVal[7]]["Count"] += 1
+                stats[oriDestPair][listVal[7]]["PaxCount"] += int(listVal[6])
+
+    return stats
+
+if __name__ == '__main__':
+    print(originStats())
+    print(pairStats())
+    print(Stats(bookingDate))
